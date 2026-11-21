@@ -1,0 +1,49 @@
+digraph flow_ask {
+  graph [rankdir=TB, fontname="Microsoft YaHei", fontsize=16,
+         label="A 区问答链（读侧）  |  漏斗四层自上而下，阶梯只减功能不加失败",
+         dpi=140, bgcolor="white", nodesep=0.3, ranksep=0.55];
+  node  [fontname="Microsoft YaHei", fontsize=11, shape=box, style="rounded,filled",
+         fillcolor="#F2F4F8", color="#5A6478", margin="0.16,0.08"];
+  edge  [fontname="Microsoft YaHei", fontsize=10, color="#4A5468", arrowsize=0.75];
+
+  q      [label="POST /api/ask · CLI ask · 前端 Chat\n（可见域口径三处同源，不各判一遍）", fillcolor="#E3EEF9"];
+  pre    [label="pre-filter：domain_scope 角色 → 可见知识域\n全仓唯一解析点 · 恒在最前 · 禁 post-filter", fillcolor="#FBEBEA", color="#B04A4A"];
+  caps   [label="取档一次 → QaState.caps\nladder_level(PoolLedger.total(), B2 soft=6 / hard=8)\n档 0 全量｜档 1 弃④保③（max_hops 收 1，仍生成）｜档 2 弃④③保②", fillcolor="#FDF3DF", color="#8A6A20"];
+  l1     [label="① 语义缓存\n键首段恒为逗号连接的 ACL 域指纹；无 TTL\n阶梯不拦这一层（同问同 ACL＝零成本降级形态）", fillcolor="#E7F1E8"];
+  l2r    [label="② 双路召回\n向量 topK + BM25 topK（各自带 ACL 过滤）"];
+  rrf    [label="RRF 融合 k=60 → RerankPort 候选 ≤50 → top-n 5–8"];
+  wikip  [label="prefer_wiki：命中 published 权威页即归属 ②层\n邻居回取 prev/next（overlap 默认 0 的补偿通道）"];
+  conf   [label="policy：置信 / 拒答判定\n拒答另记 refused，不入命中率分母"];
+  hops   [label="③ 单跳 / ④ 多跳回路\nGraphPort run_while ≤8 hops（plain ↔ langgraph 同契约）"];
+  gen    [label="LlmRouter\n云主档 → 失败自动回退本地（R11 断云不出网）\n主档失败经审计上报，不判 B3", fillcolor="#EDE7F3"];
+  cite   [label="citation 引用校验器\n无出处的句子直接拦掉", fillcolor="#FBEBEA", color="#B04A4A"];
+  dlp    [label="出口 DLP redact + quarantine 审计\n档 2 wiki 直答同经此闸；降级件不入缓存", fillcolor="#FBEBEA", color="#B04A4A"];
+  funnel [label="funnel 四层归属 → FunnelLedger\n运维经 Admin.funnel_stats / GET /api/admin/funnel 读同一册", fillcolor="#E7F1E8"];
+  ans    [label="Answer（答案 + 引用 + 块型出处 + trace_id + token 成本）", fillcolor="#E3EEF9"];
+
+  refuse [label="档 2 无权威页可读时\n【高负载降级】透明拒答（不静默、不雪崩）", fillcolor="#FDF3DF", color="#8A6A20"];
+
+  q -> pre -> caps -> l1;
+  l1 -> ans [label="命中直返", style=bold];
+  l1 -> l2r [label="未命中"];
+  l2r -> rrf -> wikip -> conf;
+  conf -> hops [label="低置信再检索"];
+  conf -> gen [label="足够置信"];
+  hops -> gen;
+  caps -> l1 [label="档 2：只放缓存命中与权威页直答", style=dashed, color="#8A6A20"];
+  caps -> wikip [label="档 2：wiki 权威页直答（零生成）", style=dashed, color="#8A6A20"];
+  caps -> refuse [style=dashed, color="#8A6A20"];
+  wikip -> dlp [label="档 2 直答分支", style=dashed];
+  gen -> cite -> dlp -> funnel -> ans;
+  refuse -> funnel [label="计入 refused", style=dashed];
+
+  subgraph cluster_observe {
+    graph [label="读同一册的运维面（只读不传感）", style="rounded,dashed", color="#8A93A6", fontsize=11];
+    pool  [label="GET /api/admin/pool · CLI admin pool\nB2 分池三本独立账：qa 5 / wiki_compile 2 / evolve 1"];
+    aud   [label="GET /api/admin/audit · CLI admin audit-replay\nappend-only 审计回放"];
+    reset [label="CLI admin reset（双人）\n复位唯一入口，HTTP 面故意不暴露", fillcolor="#FBEBEA", color="#B04A4A"];
+  }
+  funnel -> pool [style=dotted];
+  caps -> pool [style=dotted];
+  dlp -> aud [style=dotted];
+}

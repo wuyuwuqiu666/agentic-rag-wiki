@@ -1,0 +1,8 @@
+breaker: B4
+metric: injection_score
+comparator: ">="
+level: shadow
+soft: 0.6
+hard: 0.8
+reason: 注入与外泄探测（v1 shadow 起步→M4 评估硬断）
+adr: ADR-006

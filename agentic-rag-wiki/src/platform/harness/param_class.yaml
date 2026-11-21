@@ -1,0 +1,12 @@
+# 参数双级白名单（FR-MEM-4 机检，护栏产物 #4a）：safety 参数学习回路只能出提案、禁自动应用。
+# 新增/移动参数须改本文件并附 ADR。
+safety:
+  - reject_threshold          # 拒答阈：自动放宽=放过幻觉
+  - acl_rules                 # 权限映射：自动改=越权
+  - breaker_thresholds        # 熔断阈值：自动改=自废护栏
+  - dlp_patterns              # 外泄过滤
+business:
+  - rerank_candidates
+  - answer_topn
+  - retrieval_vector_topk
+  - cache_ttl_days

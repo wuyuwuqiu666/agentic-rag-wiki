@@ -1,0 +1,41 @@
+digraph flow_ingest {
+  graph [rankdir=TB, fontname="Microsoft YaHei", fontsize=16,
+         label="A 区摄取链 + 生命周期（写侧）  |  红线＝判门与不可逆动作，绿＝入账",
+         dpi=140, bgcolor="white", nodesep=0.3, ranksep=0.6];
+  node  [fontname="Microsoft YaHei", fontsize=11, shape=box, style="rounded,filled",
+         fillcolor="#F2F4F8", color="#5A6478", margin="0.16,0.08"];
+  edge  [fontname="Microsoft YaHei", fontsize=10, color="#4A5468", arrowsize=0.75];
+
+  src    [label="入口三面\nPOST /api/ingest · /ingest/file · /ingest/dir\nCLI ingest · SourcePort.pull（真实连接器＝放行项㉒）", fillcolor="#E3EEF9"];
+  parse  [label="FileParserPort.parse → ParsedBody\n正文 + page_state + OCR 账 + 失败页（ADR-009）\n旧版 OLE 经本机 Office 转换／扫描页经 RapidOCR", shape=note];
+  gate   [label="判门在写侧之前\nguard.check：B0 冻结全部写侧 / B1 批量删除占比\n一次动作只传感一次", fillcolor="#FBEBEA", color="#B04A4A"];
+  canon  [label="canonicalize → 五种 CanonicalNode\nheading / paragraph / table / code / list"];
+  budget [label="budget.resolve（摄取链唯一决议入口）\nD-1 三级漏斗：规则 → 版面小模型 → LLM → default 人审位\nD-3 判例预算 cap＝文档 token × 10%（ADR-010 node 级）"];
+  chunk  [label="chunker D-2 档位\ntext 带内 400–800 / table 原子·行组退化 / code 函数级\n<100 同型并入父节 → link_table_parents（重编号之后）"];
+  admit  [label="admission + dlp\nACL 域指纹 · DLP · B4 注入探测（v1 shadow 只脱敏不阻断）", fillcolor="#FBEBEA", color="#B04A4A"];
+  embed  [label="EmbeddingPort\ndev＝哈希档 / local＝Qwen3-Embedding-0.6B / cloud"];
+  write  [label="双写两路 + 记账\n向量 + BM25 同生同灭 · CanonicalInventory 源块册\n并按源块域清语义缓存（缓存无 TTL）", fillcolor="#E7F1E8"];
+  fanout [label="fan-out ChangeEvent → MqPort"];
+  wiki   [label="B 区 WikiLoop.run_once\ntriage 入选 → 草稿 → 人审署名 → IngestionPort.admit 回写\n前置：依据存活门 is_indexed（死依据 → 409，页停 in_review）", fillcolor="#EDE7F3"];
+
+  src -> parse -> gate -> canon -> budget -> chunk -> admit -> embed -> write -> fanout -> wiki;
+  wiki -> write [label="回写块册入账", style=dashed];
+
+  subgraph cluster_life {
+    graph [label="生命周期与背离账", style="rounded,dashed", color="#8A93A6", fontsize=12];
+    del   [label="delete → _purge 三路同清\n向量 / 词法 / 缓存 + 墓碑入账", fillcolor="#FBEBEA", color="#B04A4A"];
+    view  [label="GET /api/ingest/deletes\n三分账：recoverable / body_missing / expired_unrecoverable\n可回滚面＝窗内 ∧ 正文在"];
+    res   [label="POST /api/ingest/restore · CLI\nrestore_deletes → reconcile(sense=False) 恰一次传感"];
+    rec   [label="GET /api/ingest/reconcile · CLI admin reconcile\n只读不传感：观测入口不得自己成故障源"];
+    comp  [label="POST /api/ingest/compensate · CLI admin compensate --confirm\n整批重放两路索引 · 无逐块参数 · 故意无前端按钮\nmissing_writeback 补不上（补偿不臆造页）", fillcolor="#FBEBEA", color="#B04A4A"];
+    art   [label="workspace/reconcile 报告落盘", shape=note];
+    del -> view;
+    view -> res [label="仅窗内 ∧ 正文在"];
+    res -> write [label="重灌入库", style=dashed];
+    rec -> art [style=dotted];
+    rec -> comp [label="读/写分门：GET 补不了任何块", style=dashed];
+  }
+  write -> del [style=dashed];
+  gate -> wiki [label="B0 冻结含 B→A 回写", style=dashed, color="#B04A4A"];
+  comp -> write [label="重放仍过同一道门", style=dashed];
+}

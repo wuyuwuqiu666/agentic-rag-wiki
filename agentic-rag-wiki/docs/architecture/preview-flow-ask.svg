@@ -1,0 +1,286 @@
+<svg width="1938pt" height="2360pt"
+ viewBox="0.00 0.00 1938.00 2360.00" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" style="max-width: 100%; height: auto; display: block;" preserveAspectRatio="xMidYMid meet">
+<g id="graph0" class="graph" transform="scale(1.94444 1.94444) rotate(0) translate(4 1209.96)">
+<title>flow_ask</title>
+<polygon fill="white" stroke="none" points="-4,4 -4,-1209.96 992.84,-1209.96 992.84,4 -4,4"/>
+<text xml:space="preserve" text-anchor="middle" x="494.42" y="-8.8" font-family="Microsoft YaHei" font-size="16.00">A 区问答链（读侧） &#160;| &#160;漏斗四层自上而下，阶梯只减功能不加失败</text>
+<g id="clust1" class="cluster">
+<title>cluster_observe</title>
+<path fill="white" stroke="#8a93a6" stroke-dasharray="5,2" d="M291.84,-35.2C291.84,-35.2 968.84,-35.2 968.84,-35.2 974.84,-35.2 980.84,-41.2 980.84,-47.2 980.84,-47.2 980.84,-98.32 980.84,-98.32 980.84,-104.32 974.84,-110.32 968.84,-110.32 968.84,-110.32 291.84,-110.32 291.84,-110.32 285.84,-110.32 279.84,-104.32 279.84,-98.32 279.84,-98.32 279.84,-47.2 279.84,-47.2 279.84,-41.2 285.84,-35.2 291.84,-35.2"/>
+<text xml:space="preserve" text-anchor="middle" x="630.34" y="-96.42" font-family="Microsoft YaHei" font-size="11.00">读同一册的运维面（只读不传感）</text>
+</g>
+<!-- q -->
+<g id="node1" class="node">
+<title>q</title>
+<path fill="#e3eef9" stroke="#5a6478" d="M565.87,-1205.96C565.87,-1205.96 405.81,-1205.96 405.81,-1205.96 399.81,-1205.96 393.81,-1199.96 393.81,-1193.96 393.81,-1193.96 393.81,-1180.04 393.81,-1180.04 393.81,-1174.04 399.81,-1168.04 405.81,-1168.04 405.81,-1168.04 565.87,-1168.04 565.87,-1168.04 571.87,-1168.04 577.87,-1174.04 577.87,-1180.04 577.87,-1180.04 577.87,-1193.96 577.87,-1193.96 577.87,-1199.96 571.87,-1205.96 565.87,-1205.96"/>
+<text xml:space="preserve" text-anchor="middle" x="485.84" y="-1190.3" font-family="Microsoft YaHei" font-size="11.00">POST /api/ask · CLI ask · 前端 Chat</text>
+<text xml:space="preserve" text-anchor="middle" x="485.84" y="-1177.1" font-family="Microsoft YaHei" font-size="11.00">（可见域口径三处同源，不各判一遍）</text>
+</g>
+<!-- pre -->
+<g id="node2" class="node">
+<title>pre</title>
+<path fill="#fbebea" stroke="#b04a4a" d="M577.92,-1127.04C577.92,-1127.04 393.76,-1127.04 393.76,-1127.04 387.76,-1127.04 381.76,-1121.04 381.76,-1115.04 381.76,-1115.04 381.76,-1101.12 381.76,-1101.12 381.76,-1095.12 387.76,-1089.12 393.76,-1089.12 393.76,-1089.12 577.92,-1089.12 577.92,-1089.12 583.92,-1089.12 589.92,-1095.12 589.92,-1101.12 589.92,-1101.12 589.92,-1115.04 589.92,-1115.04 589.92,-1121.04 583.92,-1127.04 577.92,-1127.04"/>
+<text xml:space="preserve" text-anchor="middle" x="485.84" y="-1111.38" font-family="Microsoft YaHei" font-size="11.00">pre&#45;filter：domain_scope 角色 → 可见知识域</text>
+<text xml:space="preserve" text-anchor="middle" x="485.84" y="-1098.18" font-family="Microsoft YaHei" font-size="11.00">全仓唯一解析点 · 恒在最前 · 禁 post&#45;filter</text>
+</g>
+<!-- q&#45;&gt;pre -->
+<g id="edge1" class="edge">
+<title>q&#45;&gt;pre</title>
+<path fill="none" stroke="#4a5468" d="M485.84,-1167.77C485.84,-1158.36 485.84,-1146.68 485.84,-1136.23"/>
+<polygon fill="#4a5468" stroke="#4a5468" points="488.46,-1136.46 485.84,-1128.96 483.21,-1136.46 488.46,-1136.46"/>
+</g>
+<!-- caps -->
+<g id="node3" class="node">
+<title>caps</title>
+<path fill="#fdf3df" stroke="#8a6a20" d="M624.84,-1048.12C624.84,-1048.12 346.83,-1048.12 346.83,-1048.12 340.83,-1048.12 334.83,-1042.12 334.83,-1036.12 334.83,-1036.12 334.83,-1009 334.83,-1009 334.83,-1003 340.83,-997 346.83,-997 346.83,-997 624.84,-997 624.84,-997 630.84,-997 636.84,-1003 636.84,-1009 636.84,-1009 636.84,-1036.12 636.84,-1036.12 636.84,-1042.12 630.84,-1048.12 624.84,-1048.12"/>
+<text xml:space="preserve" text-anchor="middle" x="485.84" y="-1032.46" font-family="Microsoft YaHei" font-size="11.00">取档一次 → QaState.caps</text>
+<text xml:space="preserve" text-anchor="middle" x="485.84" y="-1019.26" font-family="Microsoft YaHei" font-size="11.00">ladder_level(PoolLedger.total(), B2 soft=6 / hard=8)</text>
+<text xml:space="preserve" text-anchor="middle" x="485.84" y="-1006.06" font-family="Microsoft YaHei" font-size="11.00">档 0 全量｜档 1 弃④保③（max_hops 收 1，仍生成）｜档 2 弃④③保②</text>
+</g>
+<!-- pre&#45;&gt;caps -->
+<g id="edge2" class="edge">
+<title>pre&#45;&gt;caps</title>
+<path fill="none" stroke="#4a5468" d="M485.84,-1088.96C485.84,-1079.74 485.84,-1068.22 485.84,-1057.44"/>
+<polygon fill="#4a5468" stroke="#4a5468" points="488.46,-1057.63 485.84,-1050.13 483.21,-1057.63 488.46,-1057.63"/>
+</g>
+<!-- l1 -->
+<g id="node4" class="node">
+<title>l1</title>
+<path fill="#e7f1e8" stroke="#5a6478" d="M413.23,-945C413.23,-945 224.44,-945 224.44,-945 218.44,-945 212.44,-939 212.44,-933 212.44,-933 212.44,-905.88 212.44,-905.88 212.44,-899.88 218.44,-893.88 224.44,-893.88 224.44,-893.88 413.23,-893.88 413.23,-893.88 419.23,-893.88 425.23,-899.88 425.23,-905.88 425.23,-905.88 425.23,-933 425.23,-933 425.23,-939 419.23,-945 413.23,-945"/>
+<text xml:space="preserve" text-anchor="middle" x="318.84" y="-929.34" font-family="Microsoft YaHei" font-size="11.00">① 语义缓存</text>
+<text xml:space="preserve" text-anchor="middle" x="318.84" y="-916.14" font-family="Microsoft YaHei" font-size="11.00">键首段恒为逗号连接的 ACL 域指纹；无 TTL</text>
+<text xml:space="preserve" text-anchor="middle" x="318.84" y="-902.94" font-family="Microsoft YaHei" font-size="11.00">阶梯不拦这一层（同问同 ACL＝零成本降级形态）</text>
+</g>
+<!-- caps&#45;&gt;l1 -->
+<g id="edge3" class="edge">
+<title>caps&#45;&gt;l1</title>
+<path fill="none" stroke="#4a5468" d="M358.52,-996.57C349.06,-991.23 340.31,-984.78 332.84,-977 326.86,-970.77 323.31,-962.41 321.24,-954.03"/>
+<polygon fill="#4a5468" stroke="#4a5468" points="323.85,-953.73 319.86,-946.86 318.7,-954.72 323.85,-953.73"/>
+</g>
+<!-- caps&#45;&gt;l1 -->
+<g id="edge12" class="edge">
+<title>caps&#45;&gt;l1</title>
+<path fill="none" stroke="#8a6a20" stroke-dasharray="5,2" d="M389.83,-996.63C377.91,-991.26 366.4,-984.78 356.34,-977 348.05,-970.59 340.99,-961.8 335.32,-953.07"/>
+<polygon fill="#8a6a20" stroke="#8a6a20" points="337.62,-951.8 331.47,-946.76 333.13,-954.53 337.62,-951.8"/>
+<text xml:space="preserve" text-anchor="middle" x="412.59" y="-968" font-family="Microsoft YaHei" font-size="10.00">档 2：只放缓存命中与权威页直答</text>
+</g>
+<!-- wikip -->
+<g id="node7" class="node">
+<title>wikip</title>
+<path fill="#f2f4f8" stroke="#5a6478" d="M571.5,-685.96C571.5,-685.96 374.18,-685.96 374.18,-685.96 368.18,-685.96 362.18,-679.96 362.18,-673.96 362.18,-673.96 362.18,-660.04 362.18,-660.04 362.18,-654.04 368.18,-648.04 374.18,-648.04 374.18,-648.04 571.5,-648.04 571.5,-648.04 577.5,-648.04 583.5,-654.04 583.5,-660.04 583.5,-660.04 583.5,-673.96 583.5,-673.96 583.5,-679.96 577.5,-685.96 571.5,-685.96"/>
+<text xml:space="preserve" text-anchor="middle" x="472.84" y="-670.3" font-family="Microsoft YaHei" font-size="11.00">prefer_wiki：命中 published 权威页即归属 ②层</text>
+<text xml:space="preserve" text-anchor="middle" x="472.84" y="-657.1" font-family="Microsoft YaHei" font-size="11.00">邻居回取 prev/next（overlap 默认 0 的补偿通道）</text>
+</g>
+<!-- caps&#45;&gt;wikip -->
+<g id="edge13" class="edge">
+<title>caps&#45;&gt;wikip</title>
+<path fill="none" stroke="#8a6a20" stroke-dasharray="5,2" d="M485.84,-996.63C485.84,-976.16 485.84,-946.42 485.84,-920.44 485.84,-920.44 485.84,-920.44 485.84,-743.96 485.84,-727.45 482.82,-709.21 479.69,-694.74"/>
+<polygon fill="#8a6a20" stroke="#8a6a20" points="482.32,-694.47 478.09,-687.74 477.2,-695.64 482.32,-694.47"/>
+<text xml:space="preserve" text-anchor="middle" x="544.73" y="-819.92" font-family="Microsoft YaHei" font-size="10.00">档 2：wiki 权威页直答（零生成）</text>
+</g>
+<!-- refuse -->
+<g id="node15" class="node">
+<title>refuse</title>
+<path fill="#fdf3df" stroke="#8a6a20" d="M702.86,-938.4C702.86,-938.4 538.82,-938.4 538.82,-938.4 532.82,-938.4 526.82,-932.4 526.82,-926.4 526.82,-926.4 526.82,-912.48 526.82,-912.48 526.82,-906.48 532.82,-900.48 538.82,-900.48 538.82,-900.48 702.86,-900.48 702.86,-900.48 708.86,-900.48 714.86,-906.48 714.86,-912.48 714.86,-912.48 714.86,-926.4 714.86,-926.4 714.86,-932.4 708.86,-938.4 702.86,-938.4"/>
+<text xml:space="preserve" text-anchor="middle" x="620.84" y="-922.74" font-family="Microsoft YaHei" font-size="11.00">档 2 无权威页可读时</text>
+<text xml:space="preserve" text-anchor="middle" x="620.84" y="-909.54" font-family="Microsoft YaHei" font-size="11.00">【高负载降级】透明拒答（不静默、不雪崩）</text>
+</g>
+<!-- caps&#45;&gt;refuse -->
+<g id="edge14" class="edge">
+<title>caps&#45;&gt;refuse</title>
+<path fill="none" stroke="#8a6a20" stroke-dasharray="5,2" d="M519.21,-996.56C540.58,-980.56 568.15,-959.91 589.18,-944.15"/>
+<polygon fill="#8a6a20" stroke="#8a6a20" points="590.69,-946.31 595.11,-939.71 587.54,-942.1 590.69,-946.31"/>
+</g>
+<!-- pool -->
+<g id="node16" class="node">
+<title>pool</title>
+<path fill="#f2f4f8" stroke="#5a6478" d="M778.18,-81.12C778.18,-81.12 555.5,-81.12 555.5,-81.12 549.5,-81.12 543.5,-75.12 543.5,-69.12 543.5,-69.12 543.5,-55.2 543.5,-55.2 543.5,-49.2 549.5,-43.2 555.5,-43.2 555.5,-43.2 778.18,-43.2 778.18,-43.2 784.18,-43.2 790.18,-49.2 790.18,-55.2 790.18,-55.2 790.18,-69.12 790.18,-69.12 790.18,-75.12 784.18,-81.12 778.18,-81.12"/>
+<text xml:space="preserve" text-anchor="middle" x="666.84" y="-65.46" font-family="Microsoft YaHei" font-size="11.00">GET /api/admin/pool · CLI admin pool</text>
+<text xml:space="preserve" text-anchor="middle" x="666.84" y="-52.26" font-family="Microsoft YaHei" font-size="11.00">B2 分池三本独立账：qa 5 / wiki_compile 2 / evolve 1</text>
+</g>
+<!-- caps&#45;&gt;pool -->
+<g id="edge22" class="edge">
+<title>caps&#45;&gt;pool</title>
+<path fill="none" stroke="#4a5468" stroke-dasharray="1,5" d="M612.3,-996.59C681.31,-979.21 752.84,-953.28 752.84,-920.44 752.84,-920.44 752.84,-920.44 752.84,-157.28 752.84,-127.52 729.12,-103.06 706.59,-86.54"/>
+<polygon fill="#4a5468" stroke="#4a5468" points="708.24,-84.49 700.59,-82.33 705.22,-88.78 708.24,-84.49"/>
+</g>
+<!-- l2r -->
+<g id="node5" class="node">
+<title>l2r</title>
+<path fill="#f2f4f8" stroke="#5a6478" d="M418.9,-841.88C418.9,-841.88 228.78,-841.88 228.78,-841.88 222.78,-841.88 216.78,-835.88 216.78,-829.88 216.78,-829.88 216.78,-815.96 216.78,-815.96 216.78,-809.96 222.78,-803.96 228.78,-803.96 228.78,-803.96 418.9,-803.96 418.9,-803.96 424.9,-803.96 430.9,-809.96 430.9,-815.96 430.9,-815.96 430.9,-829.88 430.9,-829.88 430.9,-835.88 424.9,-841.88 418.9,-841.88"/>
+<text xml:space="preserve" text-anchor="middle" x="323.84" y="-826.22" font-family="Microsoft YaHei" font-size="11.00">② 双路召回</text>
+<text xml:space="preserve" text-anchor="middle" x="323.84" y="-813.02" font-family="Microsoft YaHei" font-size="11.00">向量 topK + BM25 topK（各自带 ACL 过滤）</text>
+</g>
+<!-- l1&#45;&gt;l2r -->
+<g id="edge5" class="edge">
+<title>l1&#45;&gt;l2r</title>
+<path fill="none" stroke="#4a5468" d="M320.15,-893.61C320.84,-880.54 321.69,-864.5 322.4,-851.1"/>
+<polygon fill="#4a5468" stroke="#4a5468" points="325.01,-851.46 322.79,-843.83 319.77,-851.18 325.01,-851.46"/>
+<text xml:space="preserve" text-anchor="middle" x="333.04" y="-864.88" font-family="Microsoft YaHei" font-size="10.00">未命中</text>
+</g>
+<!-- ans -->
+<g id="node14" class="node">
+<title>ans</title>
+<path fill="#e3eef9" stroke="#5a6478" d="M253.68,-80.16C253.68,-80.16 12,-80.16 12,-80.16 6,-80.16 0,-74.16 0,-68.16 0,-68.16 0,-56.16 0,-56.16 0,-50.16 6,-44.16 12,-44.16 12,-44.16 253.68,-44.16 253.68,-44.16 259.68,-44.16 265.68,-50.16 265.68,-56.16 265.68,-56.16 265.68,-68.16 265.68,-68.16 265.68,-74.16 259.68,-80.16 253.68,-80.16"/>
+<text xml:space="preserve" text-anchor="middle" x="132.84" y="-58.86" font-family="Microsoft YaHei" font-size="11.00">Answer（答案 + 引用 + 块型出处 + trace_id + token 成本）</text>
+</g>
+<!-- l1&#45;&gt;ans -->
+<g id="edge4" class="edge">
+<title>l1&#45;&gt;ans</title>
+<path fill="none" stroke="#4a5468" stroke-width="2" d="M211.99,-902C170.54,-888.98 132.84,-865.67 132.84,-823.92 132.84,-823.92 132.84,-823.92 132.84,-157.28 132.84,-134.36 132.84,-108.29 132.84,-89.41"/>
+<polygon fill="#4a5468" stroke="#4a5468" stroke-width="2" points="135.46,-91.03 132.84,-83.53 130.21,-91.03 135.46,-91.03"/>
+<text xml:space="preserve" text-anchor="middle" x="147.84" y="-495.16" font-family="Microsoft YaHei" font-size="10.00">命中直返</text>
+</g>
+<!-- rrf -->
+<g id="node6" class="node">
+<title>rrf</title>
+<path fill="#f2f4f8" stroke="#5a6478" d="M439.14,-762.96C439.14,-762.96 210.54,-762.96 210.54,-762.96 204.54,-762.96 198.54,-756.96 198.54,-750.96 198.54,-750.96 198.54,-738.96 198.54,-738.96 198.54,-732.96 204.54,-726.96 210.54,-726.96 210.54,-726.96 439.14,-726.96 439.14,-726.96 445.14,-726.96 451.14,-732.96 451.14,-738.96 451.14,-738.96 451.14,-750.96 451.14,-750.96 451.14,-756.96 445.14,-762.96 439.14,-762.96"/>
+<text xml:space="preserve" text-anchor="middle" x="324.84" y="-741.66" font-family="Microsoft YaHei" font-size="11.00">RRF 融合 k=60 → RerankPort 候选 ≤50 → top&#45;n 5–8</text>
+</g>
+<!-- l2r&#45;&gt;rrf -->
+<g id="edge6" class="edge">
+<title>l2r&#45;&gt;rrf</title>
+<path fill="none" stroke="#4a5468" d="M324.08,-803.53C324.2,-794.19 324.36,-782.66 324.49,-772.38"/>
+<polygon fill="#4a5468" stroke="#4a5468" points="327.12,-772.44 324.59,-764.91 321.87,-772.37 327.12,-772.44"/>
+</g>
+<!-- rrf&#45;&gt;wikip -->
+<g id="edge7" class="edge">
+<title>rrf&#45;&gt;wikip</title>
+<path fill="none" stroke="#4a5468" d="M358.79,-726.53C379.71,-715.8 406.74,-701.93 429.23,-690.38"/>
+<polygon fill="#4a5468" stroke="#4a5468" points="430.16,-692.86 435.63,-687.1 427.76,-688.19 430.16,-692.86"/>
+</g>
+<!-- conf -->
+<g id="node8" class="node">
+<title>conf</title>
+<path fill="#f2f4f8" stroke="#5a6478" d="M526.42,-607.04C526.42,-607.04 393.26,-607.04 393.26,-607.04 387.26,-607.04 381.26,-601.04 381.26,-595.04 381.26,-595.04 381.26,-581.12 381.26,-581.12 381.26,-575.12 387.26,-569.12 393.26,-569.12 393.26,-569.12 526.42,-569.12 526.42,-569.12 532.42,-569.12 538.42,-575.12 538.42,-581.12 538.42,-581.12 538.42,-595.04 538.42,-595.04 538.42,-601.04 532.42,-607.04 526.42,-607.04"/>
+<text xml:space="preserve" text-anchor="middle" x="459.84" y="-591.38" font-family="Microsoft YaHei" font-size="11.00">policy：置信 / 拒答判定</text>
+<text xml:space="preserve" text-anchor="middle" x="459.84" y="-578.18" font-family="Microsoft YaHei" font-size="11.00">拒答另记 refused，不入命中率分母</text>
+</g>
+<!-- wikip&#45;&gt;conf -->
+<g id="edge8" class="edge">
+<title>wikip&#45;&gt;conf</title>
+<path fill="none" stroke="#4a5468" d="M469.76,-647.77C468.17,-638.36 466.19,-626.68 464.43,-616.23"/>
+<polygon fill="#4a5468" stroke="#4a5468" points="467.03,-615.89 463.2,-608.94 461.86,-616.77 467.03,-615.89"/>
+</g>
+<!-- dlp -->
+<g id="node12" class="node">
+<title>dlp</title>
+<path fill="#fbebea" stroke="#b04a4a" d="M565.89,-256.16C565.89,-256.16 409.79,-256.16 409.79,-256.16 403.79,-256.16 397.79,-250.16 397.79,-244.16 397.79,-244.16 397.79,-230.24 397.79,-230.24 397.79,-224.24 403.79,-218.24 409.79,-218.24 409.79,-218.24 565.89,-218.24 565.89,-218.24 571.89,-218.24 577.89,-224.24 577.89,-230.24 577.89,-230.24 577.89,-244.16 577.89,-244.16 577.89,-250.16 571.89,-256.16 565.89,-256.16"/>
+<text xml:space="preserve" text-anchor="middle" x="487.84" y="-240.5" font-family="Microsoft YaHei" font-size="11.00">出口 DLP redact + quarantine 审计</text>
+<text xml:space="preserve" text-anchor="middle" x="487.84" y="-227.3" font-family="Microsoft YaHei" font-size="11.00">档 2 wiki 直答同经此闸；降级件不入缓存</text>
+</g>
+<!-- wikip&#45;&gt;dlp -->
+<g id="edge15" class="edge">
+<title>wikip&#45;&gt;dlp</title>
+<path fill="none" stroke="#4a5468" stroke-dasharray="5,2" d="M524.89,-647.55C549.19,-635.29 572.84,-616.35 572.84,-589.08 572.84,-589.08 572.84,-589.08 572.84,-315.12 572.84,-292.1 555.49,-274.18 536.47,-261.45"/>
+<polygon fill="#4a5468" stroke="#4a5468" points="537.87,-259.24 530.13,-257.47 535.08,-263.68 537.87,-259.24"/>
+<text xml:space="preserve" text-anchor="middle" x="596.59" y="-450.2" font-family="Microsoft YaHei" font-size="10.00">档 2 直答分支</text>
+</g>
+<!-- hops -->
+<g id="node9" class="node">
+<title>hops</title>
+<path fill="#f2f4f8" stroke="#5a6478" d="M452.83,-517.12C452.83,-517.12 196.85,-517.12 196.85,-517.12 190.85,-517.12 184.85,-511.12 184.85,-505.12 184.85,-505.12 184.85,-491.2 184.85,-491.2 184.85,-485.2 190.85,-479.2 196.85,-479.2 196.85,-479.2 452.83,-479.2 452.83,-479.2 458.83,-479.2 464.83,-485.2 464.83,-491.2 464.83,-491.2 464.83,-505.12 464.83,-505.12 464.83,-511.12 458.83,-517.12 452.83,-517.12"/>
+<text xml:space="preserve" text-anchor="middle" x="324.84" y="-501.46" font-family="Microsoft YaHei" font-size="11.00">③ 单跳 / ④ 多跳回路</text>
+<text xml:space="preserve" text-anchor="middle" x="324.84" y="-488.26" font-family="Microsoft YaHei" font-size="11.00">GraphPort run_while ≤8 hops（plain ↔ langgraph 同契约）</text>
+</g>
+<!-- conf&#45;&gt;hops -->
+<g id="edge9" class="edge">
+<title>conf&#45;&gt;hops</title>
+<path fill="none" stroke="#4a5468" d="M431.54,-568.65C410.84,-555.17 382.61,-536.78 360.39,-522.31"/>
+<polygon fill="#4a5468" stroke="#4a5468" points="362.09,-520.29 354.37,-518.39 359.22,-524.69 362.09,-520.29"/>
+<text xml:space="preserve" text-anchor="middle" x="422.92" y="-540.12" font-family="Microsoft YaHei" font-size="10.00">低置信再检索</text>
+</g>
+<!-- gen -->
+<g id="node10" class="node">
+<title>gen</title>
+<path fill="#ede7f3" stroke="#5a6478" d="M527.03,-427.2C527.03,-427.2 344.65,-427.2 344.65,-427.2 338.65,-427.2 332.65,-421.2 332.65,-415.2 332.65,-415.2 332.65,-388.08 332.65,-388.08 332.65,-382.08 338.65,-376.08 344.65,-376.08 344.65,-376.08 527.03,-376.08 527.03,-376.08 533.03,-376.08 539.03,-382.08 539.03,-388.08 539.03,-388.08 539.03,-415.2 539.03,-415.2 539.03,-421.2 533.03,-427.2 527.03,-427.2"/>
+<text xml:space="preserve" text-anchor="middle" x="435.84" y="-411.54" font-family="Microsoft YaHei" font-size="11.00">LlmRouter</text>
+<text xml:space="preserve" text-anchor="middle" x="435.84" y="-398.34" font-family="Microsoft YaHei" font-size="11.00">云主档 → 失败自动回退本地（R11 断云不出网）</text>
+<text xml:space="preserve" text-anchor="middle" x="435.84" y="-385.14" font-family="Microsoft YaHei" font-size="11.00">主档失败经审计上报，不判 B3</text>
+</g>
+<!-- conf&#45;&gt;gen -->
+<g id="edge10" class="edge">
+<title>conf&#45;&gt;gen</title>
+<path fill="none" stroke="#4a5468" d="M466.77,-568.94C474.05,-547.34 483.47,-510.28 475.84,-479.2 472.07,-463.86 464.64,-448.18 457.18,-435.04"/>
+<polygon fill="#4a5468" stroke="#4a5468" points="459.65,-434.06 453.59,-428.93 455.13,-436.72 459.65,-434.06"/>
+<text xml:space="preserve" text-anchor="middle" x="493.67" y="-495.16" font-family="Microsoft YaHei" font-size="10.00">足够置信</text>
+</g>
+<!-- hops&#45;&gt;gen -->
+<g id="edge11" class="edge">
+<title>hops&#45;&gt;gen</title>
+<path fill="none" stroke="#4a5468" d="M346.51,-478.71C361.65,-465.81 382.24,-448.28 399.84,-433.3"/>
+<polygon fill="#4a5468" stroke="#4a5468" points="401.51,-435.32 405.51,-428.46 398.1,-431.33 401.51,-435.32"/>
+</g>
+<!-- cite -->
+<g id="node11" class="node">
+<title>cite</title>
+<path fill="#fbebea" stroke="#b04a4a" d="M501.61,-335.08C501.61,-335.08 420.07,-335.08 420.07,-335.08 414.07,-335.08 408.07,-329.08 408.07,-323.08 408.07,-323.08 408.07,-309.16 408.07,-309.16 408.07,-303.16 414.07,-297.16 420.07,-297.16 420.07,-297.16 501.61,-297.16 501.61,-297.16 507.61,-297.16 513.61,-303.16 513.61,-309.16 513.61,-309.16 513.61,-323.08 513.61,-323.08 513.61,-329.08 507.61,-335.08 501.61,-335.08"/>
+<text xml:space="preserve" text-anchor="middle" x="460.84" y="-319.42" font-family="Microsoft YaHei" font-size="11.00">citation 引用校验器</text>
+<text xml:space="preserve" text-anchor="middle" x="460.84" y="-306.22" font-family="Microsoft YaHei" font-size="11.00">无出处的句子直接拦掉</text>
+</g>
+<!-- gen&#45;&gt;cite -->
+<g id="edge16" class="edge">
+<title>gen&#45;&gt;cite</title>
+<path fill="none" stroke="#4a5468" d="M443.34,-375.58C446.32,-365.62 449.76,-354.14 452.79,-344.01"/>
+<polygon fill="#4a5468" stroke="#4a5468" points="455.26,-344.91 454.9,-336.97 450.23,-343.41 455.26,-344.91"/>
+</g>
+<!-- cite&#45;&gt;dlp -->
+<g id="edge17" class="edge">
+<title>cite&#45;&gt;dlp</title>
+<path fill="none" stroke="#4a5468" d="M467.24,-296.89C470.58,-287.38 474.72,-275.56 478.42,-265.03"/>
+<polygon fill="#4a5468" stroke="#4a5468" points="480.88,-265.94 480.89,-257.99 475.93,-264.2 480.88,-265.94"/>
+</g>
+<!-- funnel -->
+<g id="node13" class="node">
+<title>funnel</title>
+<path fill="#e7f1e8" stroke="#5a6478" d="M706.66,-177.24C706.66,-177.24 447.02,-177.24 447.02,-177.24 441.02,-177.24 435.02,-171.24 435.02,-165.24 435.02,-165.24 435.02,-151.32 435.02,-151.32 435.02,-145.32 441.02,-139.32 447.02,-139.32 447.02,-139.32 706.66,-139.32 706.66,-139.32 712.66,-139.32 718.66,-145.32 718.66,-151.32 718.66,-151.32 718.66,-165.24 718.66,-165.24 718.66,-171.24 712.66,-177.24 706.66,-177.24"/>
+<text xml:space="preserve" text-anchor="middle" x="576.84" y="-161.58" font-family="Microsoft YaHei" font-size="11.00">funnel 四层归属 → FunnelLedger</text>
+<text xml:space="preserve" text-anchor="middle" x="576.84" y="-148.38" font-family="Microsoft YaHei" font-size="11.00">运维经 Admin.funnel_stats / GET /api/admin/funnel 读同一册</text>
+</g>
+<!-- dlp&#45;&gt;funnel -->
+<g id="edge18" class="edge">
+<title>dlp&#45;&gt;funnel</title>
+<path fill="none" stroke="#4a5468" d="M508.93,-217.97C520.93,-207.61 536.09,-194.5 549.05,-183.3"/>
+<polygon fill="#4a5468" stroke="#4a5468" points="550.49,-185.52 554.45,-178.63 547.05,-181.55 550.49,-185.52"/>
+</g>
+<!-- aud -->
+<g id="node17" class="node">
+<title>aud</title>
+<path fill="#f2f4f8" stroke="#5a6478" d="M509.9,-81.12C509.9,-81.12 299.78,-81.12 299.78,-81.12 293.78,-81.12 287.78,-75.12 287.78,-69.12 287.78,-69.12 287.78,-55.2 287.78,-55.2 287.78,-49.2 293.78,-43.2 299.78,-43.2 299.78,-43.2 509.9,-43.2 509.9,-43.2 515.9,-43.2 521.9,-49.2 521.9,-55.2 521.9,-55.2 521.9,-69.12 521.9,-69.12 521.9,-75.12 515.9,-81.12 509.9,-81.12"/>
+<text xml:space="preserve" text-anchor="middle" x="404.84" y="-65.46" font-family="Microsoft YaHei" font-size="11.00">GET /api/admin/audit · CLI admin audit&#45;replay</text>
+<text xml:space="preserve" text-anchor="middle" x="404.84" y="-52.26" font-family="Microsoft YaHei" font-size="11.00">append&#45;only 审计回放</text>
+</g>
+<!-- dlp&#45;&gt;aud -->
+<g id="edge23" class="edge">
+<title>dlp&#45;&gt;aud</title>
+<path fill="none" stroke="#4a5468" stroke-dasharray="1,5" d="M460.8,-217.97C447.55,-207.6 432.61,-193.45 423.84,-177.24 409.17,-150.11 405.26,-114.46 404.49,-90.29"/>
+<polygon fill="#4a5468" stroke="#4a5468" points="407.11,-90.28 404.35,-82.83 401.86,-90.38 407.11,-90.28"/>
+</g>
+<!-- funnel&#45;&gt;ans -->
+<g id="edge19" class="edge">
+<title>funnel&#45;&gt;ans</title>
+<path fill="none" stroke="#4a5468" d="M434.53,-140.12C383.77,-132.7 326.41,-122.8 274.84,-110.32 245.45,-103.21 213.43,-92.81 187.25,-83.59"/>
+<polygon fill="#4a5468" stroke="#4a5468" points="188.33,-81.19 180.39,-81.15 186.57,-86.14 188.33,-81.19"/>
+</g>
+<!-- funnel&#45;&gt;pool -->
+<g id="edge21" class="edge">
+<title>funnel&#45;&gt;pool</title>
+<path fill="none" stroke="#4a5468" stroke-dasharray="1,5" d="M594.19,-139.13C608.17,-124.51 627.96,-103.82 643.36,-87.72"/>
+<polygon fill="#4a5468" stroke="#4a5468" points="644.9,-89.9 648.19,-82.67 641.11,-86.27 644.9,-89.9"/>
+</g>
+<!-- refuse&#45;&gt;funnel -->
+<g id="edge20" class="edge">
+<title>refuse&#45;&gt;funnel</title>
+<path fill="none" stroke="#4a5468" stroke-dasharray="5,2" d="M626.13,-900.14C631.12,-881.23 637.84,-850.76 637.84,-823.92 637.84,-823.92 637.84,-823.92 637.84,-236.2 637.84,-215.51 624.12,-197.14 609.69,-183.55"/>
+<polygon fill="#4a5468" stroke="#4a5468" points="611.54,-181.68 604.19,-178.66 608.05,-185.6 611.54,-181.68"/>
+<text xml:space="preserve" text-anchor="middle" x="661.3" y="-540.12" font-family="Microsoft YaHei" font-size="10.00">计入 refused</text>
+</g>
+<!-- reset -->
+<g id="node18" class="node">
+<title>reset</title>
+<path fill="#fbebea" stroke="#b04a4a" d="M961.11,-81.12C961.11,-81.12 824.57,-81.12 824.57,-81.12 818.57,-81.12 812.57,-75.12 812.57,-69.12 812.57,-69.12 812.57,-55.2 812.57,-55.2 812.57,-49.2 818.57,-43.2 824.57,-43.2 824.57,-43.2 961.11,-43.2 961.11,-43.2 967.11,-43.2 973.11,-49.2 973.11,-55.2 973.11,-55.2 973.11,-69.12 973.11,-69.12 973.11,-75.12 967.11,-81.12 961.11,-81.12"/>
+<text xml:space="preserve" text-anchor="middle" x="892.84" y="-65.46" font-family="Microsoft YaHei" font-size="11.00">CLI admin reset（双人）</text>
+<text xml:space="preserve" text-anchor="middle" x="892.84" y="-52.26" font-family="Microsoft YaHei" font-size="11.00">复位唯一入口，HTTP 面故意不暴露</text>
+</g>
+</g>
+</svg>

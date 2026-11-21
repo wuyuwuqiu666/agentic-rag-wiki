@@ -1,0 +1,8 @@
+breaker: B5
+metric: reconcile_missing_chunks
+comparator: ">="
+level: hard
+soft: 1
+hard: 100
+reason: 对账背离（清单应索引数 − 索引实际数，>0 即背离债，M1 shadow 观察）
+adr: ADR-002

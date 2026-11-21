@@ -1,0 +1,8 @@
+breaker: B3
+metric: provider_error_rate
+comparator: ">="
+level: hard
+soft: 0.05
+hard: 0.2
+reason: 模型供给失败率（含 embedding 出口；挂 B3 通道，半开探测续传）
+adr: ADR-005

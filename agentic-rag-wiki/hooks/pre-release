@@ -1,0 +1,49 @@
+#!/usr/bin/env bash
+# pre-release（护栏产物 #6，PRD §9/§12 发布前节点）：发布/别名切换前阻断式核验，失败升级人工。
+# 与 CI/hooks 共用同一脚本源（E1，杜绝"本地绿 CI 红"）。禁 --no-verify（T4）。
+# 安装：cp hooks/pre-release .git/hooks/pre-release && chmod +x .git/hooks/pre-release
+# 依赖真实模型/PG·Milvus/凭证的项在放行环境执行；本脚本在无这些时 fail-loud 而非静默通过（NFR-8 精神）。
+set -euo pipefail
+export PYTHONUTF8=1 PYTHONIOENCODING=utf-8
+cd "$(git rev-parse --show-toplevel)"
+
+echo "[pre-release] 1/4 护栏全量＝lint/type + 10 道 harness 门（import/schema/contract-compat/breaker/paramclass/lifecycle/config-surface/backend-choice/runbook/deps-license，M4-cn⑮ 回录缺的两个标签名）"
+python -m ruff check src tests
+python -m mypy src
+python -m src.platform.harness.check_imports
+python -m src.platform.harness.schemas.validate
+python -m src.platform.harness.contract_compat
+python -m src.platform.harness.breaker_rules.validate
+python -m src.platform.harness.param_class_check
+python -m src.platform.harness.lifecycle_check
+python -m src.platform.harness.config_surface_check
+python -m src.platform.harness.backend_choice_check
+python -m src.platform.harness.runbook_check
+# E8 依赖治理：许可证门（被禁 copyleft=红）+ SBOM diff（对既有基线报增删改）。CVE 实时扫描/权威 SPDX 对账=放行档。
+python -m src.platform.harness.deps_governance --baseline harness/sbom_baseline.json
+
+echo "[pre-release] 2/4 冒烟 + 双实现契约 + 混沌 + 演练"
+python -m pytest src/platform/breaker tests/smoke tests/contract tests/chaos tests/perf -q
+
+echo "[pre-release] 3/4 覆盖率门禁（E7 分档 90/70，coverage.json 缺失即红）"
+python -m pytest src/platform/breaker tests -q --cov=src --cov-report=json:coverage.json
+python -m src.platform.harness.coverage_gate
+
+echo "[pre-release] 4/4 评测跑分基线 + 出网/预算核验"
+# 金标 200 题（人工核定）就绪时：APPRUN=1 python -m tests.eval.run --golden <人工集> → 断言幻觉率<1%。
+# 未就绪则跑合成 harness 自检，报告显式声明"非质量结论"（禁止引用 dev/fake 档为达标口径，AGENTS §8）。
+python -m pytest tests/eval -q
+python - <<'PY'
+import json, os, sys
+from pathlib import Path
+# token/出网预算核对：执行档唯一常态出网=受控 LLM 网关；白名单必须显式声明方可发布（T5）。
+allow = os.environ.get("APP_EGRESS_ALLOWLIST_HOSTS", "").strip()
+if not allow:
+    print("[pre-release] 出网白名单 APP_EGRESS_ALLOWLIST_HOSTS 未设置——发布前须在部署侧网络策略落地（T5 阻断）。")
+    sys.exit(1)
+print(f"[pre-release] 出网白名单已声明：{allow}")
+rep = Path("workspace/eval/report.md")
+print(f"[pre-release] 评测报告：{rep if rep.is_file() else '未生成（合成档，非质量结论）'}")
+PY
+
+echo "[pre-release] 全绿，可发布（真实质量/G1 数字仍须放行环境的真模型+人工金标判定，见 AGENTS §8）"

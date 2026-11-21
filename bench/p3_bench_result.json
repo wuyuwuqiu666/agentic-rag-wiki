@@ -1,0 +1,54 @@
+{
+  "torch": "2.11.0+cu128",
+  "cuda": "12.8",
+  "gpu": "NVIDIA GeForce RTX 5060 Laptop GPU",
+  "vram_GB": 7.96,
+  "model": "C:\\Users\\z1499\\.cache\\modelscope\\models\\Qwen--Qwen3-Embedding-0.6B\\snapshots\\master",
+  "dtype": "fp16",
+  "tokens_per_chunk": 531,
+  "batches": {
+    "8": {
+      "chunks_per_s": 14.6,
+      "tokens_per_s": 7729,
+      "ms_per_batch": 549.6,
+      "ms_per_chunk": 68.7,
+      "dim": 1024,
+      "vram_alloc_GB": 1.12,
+      "vram_reserved_GB": 2.27
+    },
+    "32": {
+      "chunks_per_s": 22.0,
+      "tokens_per_s": 11665,
+      "ms_per_batch": 1456.6,
+      "ms_per_chunk": 45.5,
+      "dim": 1024,
+      "vram_alloc_GB": 1.12,
+      "vram_reserved_GB": 3.76
+    },
+    "64": {
+      "chunks_per_s": 8.1,
+      "tokens_per_s": 4309,
+      "ms_per_batch": 7885.1,
+      "ms_per_chunk": 123.2,
+      "dim": 1024,
+      "vram_alloc_GB": 1.12,
+      "vram_reserved_GB": 6.69
+    },
+    "128": {
+      "chunks_per_s": 1.1,
+      "tokens_per_s": 594,
+      "ms_per_batch": 114301.9,
+      "ms_per_chunk": 893.0,
+      "dim": 1024,
+      "vram_alloc_GB": 1.12,
+      "vram_reserved_GB": 13.44
+    }
+  },
+  "oom_batches": [],
+  "best_chunks_per_s": 22.0,
+  "units_needed": {
+    "96h": 3,
+    "72h": 4,
+    "peak": 7
+  }
+}

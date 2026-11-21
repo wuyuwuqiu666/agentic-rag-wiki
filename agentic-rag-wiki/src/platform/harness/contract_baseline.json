@@ -1,0 +1,157 @@
+{
+  "Answer": {
+    "citations": "list[src.platform.types.answer.Citation]",
+    "confidence": "<class 'float'>",
+    "degraded": "<class 'bool'>",
+    "hops": "<class 'int'>",
+    "question": "<class 'str'>",
+    "refused": "<class 'bool'>",
+    "text": "<class 'str'>",
+    "trace_id": "<class 'str'>"
+  },
+  "AuditEvent": {
+    "actor": "<class 'str'>",
+    "detail": "<class 'str'>",
+    "doc_id": "<class 'str'>",
+    "extra": "dict[str, typing.Any]",
+    "kind": "typing.Literal['breaker_trip', 'breaker_reset', 'acl_denied', 'quarantine', 'param_change', 'external_call', 'provider_fail_loud', 'wiki_publish', 'wiki_invalidate']",
+    "partition": "<class 'str'>",
+    "trace_id": "<class 'str'>",
+    "ts": "<class 'float'>"
+  },
+  "BreakerDecision": {
+    "action": "typing.Literal['block', 'degrade', 'alarm', 'observe', 'none']",
+    "breaker": "typing.Literal['B0', 'B1', 'B2', 'B3', 'B4', 'B5']",
+    "escalated_from": "list[str]",
+    "level": "<enum 'BreakerLevel'>",
+    "metric": "<class 'str'>",
+    "reason": "<class 'str'>",
+    "threshold": "float | None",
+    "tripped": "<class 'bool'>",
+    "ts": "<class 'float'>",
+    "value": "<class 'float'>"
+  },
+  "CanonicalDocument": {
+    "acl_tags": "list[str]",
+    "checksum": "<class 'str'>",
+    "doc_id": "<class 'str'>",
+    "doc_type": "typing.Literal['policy', 'contract', 'meeting', 'wiki', 'runbook', 'other']",
+    "domain": "<class 'str'>",
+    "root": "list[src.platform.types.document.CanonicalNode]",
+    "title": "<class 'str'>",
+    "token_count": "<class 'int'>",
+    "version": "<class 'int'>"
+  },
+  "CanonicalEvent": {
+    "acl_tags": "list[str]",
+    "checksum": "<class 'str'>",
+    "doc_id": "<class 'str'>",
+    "doc_type": "typing.Literal['policy', 'contract', 'meeting', 'wiki', 'runbook', 'other']",
+    "domain": "<class 'str'>",
+    "op": "typing.Literal['upsert', 'delete']",
+    "origin": "typing.Literal['ingest', 'reconcile_backfill']",
+    "store_key": "<class 'str'>",
+    "token_count": "<class 'int'>",
+    "version": "<class 'int'>"
+  },
+  "CanonicalNode": {
+    "breadcrumb": "list[str]",
+    "children": "list[src.platform.types.document.CanonicalNode]",
+    "kind": "typing.Literal['heading', 'paragraph', 'table', 'code', 'list']",
+    "level": "<class 'int'>",
+    "node_id": "<class 'str'>",
+    "span": "<class 'src.platform.types.document.PageSpan'>",
+    "text": "<class 'str'>"
+  },
+  "ChangeEvent": {
+    "acl_tags_after": "list[str]",
+    "acl_tags_before": "list[str]",
+    "batch_id": "<class 'str'>",
+    "doc_id": "<class 'str'>",
+    "domain_after": "str | None",
+    "domain_before": "str | None",
+    "kind": "typing.Literal['upsert', 'delete', 'acl_change', 'domain_move']",
+    "ts": "<class 'float'>",
+    "version": "int | None"
+  },
+  "Chunk": {
+    "acl_tags": "list[str]",
+    "authority": "typing.Literal['source', 'wiki']",
+    "breadcrumb": "list[str]",
+    "chunk_id": "<class 'str'>",
+    "chunk_type": "typing.Literal['text', 'table', 'code']",
+    "doc_id": "<class 'str'>",
+    "doc_version": "<class 'int'>",
+    "embedding_model": "<class 'str'>",
+    "extra": "dict[str, typing.Any]",
+    "input_token_limit": "<class 'int'>",
+    "next": "str | None",
+    "page_no": "int | None",
+    "parent_chunk_id": "str | None",
+    "prev": "str | None",
+    "seq": "<class 'int'>",
+    "text": "<class 'str'>",
+    "token_count": "<class 'int'>",
+    "vector": "list[float]"
+  },
+  "ChunkDecision": {
+    "decisions": "list[src.platform.types.document.NodeDecision]",
+    "doc_token_count": "<class 'int'>",
+    "profile": "<class 'str'>"
+  },
+  "Document": {
+    "acl_tags": "list[str]",
+    "doc_id": "<class 'str'>",
+    "doc_type": "typing.Literal['policy', 'contract', 'meeting', 'wiki', 'runbook', 'other']",
+    "domain": "<class 'str'>",
+    "language": "<class 'str'>",
+    "page_state": "typing.Literal['digital', 'scanned', 'mixed']",
+    "raw_text": "<class 'str'>",
+    "source": "<class 'str'>",
+    "title": "<class 'str'>",
+    "version": "<class 'int'>"
+  },
+  "NodeDecision": {
+    "chunk_type": "typing.Literal['text', 'table', 'code']",
+    "confidence": "<class 'float'>",
+    "decider": "typing.Literal['rule', 'layout_model', 'llm', 'default']",
+    "node_ids": "list[str]"
+  },
+  "ParamProposal": {
+    "after": "float | str | None",
+    "auto_applicable": "<class 'bool'>",
+    "before": "float | str | None",
+    "evidence": "list[str]",
+    "param": "<class 'str'>",
+    "param_class": "typing.Literal['business', 'safety']",
+    "shadow_report": "<class 'str'>",
+    "status": "typing.Literal['proposed', 'shadow_verified', 'approved', 'applied', 'rolled_back', 'rejected']"
+  },
+  "PortraitAgg": {
+    "acl_tags": "list[str]",
+    "key": "<class 'str'>",
+    "metric_pointers": "list[str]",
+    "sample_size": "<class 'int'>",
+    "scope": "typing.Literal['role', 'domain']"
+  },
+  "WikiPage": {
+    "acl_tags": "list[str]",
+    "domain": "<class 'str'>",
+    "page_id": "<class 'str'>",
+    "reviewer": "<class 'str'>",
+    "sections": "list[src.platform.types.wiki.WikiSection]",
+    "source_doc_ids": "list[str]",
+    "status": "typing.Literal['draft', 'in_review', 'published', 'stale', 'retracted']",
+    "title": "<class 'str'>",
+    "triage_reason": "<class 'str'>",
+    "version": "<class 'int'>"
+  },
+  "WorkingMemory": {
+    "acl_tags": "list[str]",
+    "content_pointer": "<class 'str'>",
+    "created_at": "<class 'float'>",
+    "individual_id": "<class 'str'>",
+    "session_id": "<class 'str'>",
+    "ttl_seconds": "<class 'int'>"
+  }
+}

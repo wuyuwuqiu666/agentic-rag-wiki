@@ -1,0 +1,21 @@
+#!/usr/bin/env bash
+# pre-commit（护栏产物 #5）：lint/type/secret/import 方向/schema/契约向后兼容/熔断规则/参数双级/runbook 齐备 全绿才放行。
+# 禁 --no-verify（T4）。安装：cp hooks/pre-commit .git/hooks/pre-commit && chmod +x .git/hooks/pre-commit
+set -euo pipefail
+export PYTHONUTF8=1 PYTHONIOENCODING=utf-8
+cd "$(git rev-parse --show-toplevel)"
+echo "[pre-commit] ruff"       && python -m ruff check src tests
+echo "[pre-commit] mypy"       && python -m mypy src
+echo "[pre-commit] imports"    && python -m src.platform.harness.check_imports
+echo "[pre-commit] schemas"    && python -m src.platform.harness.schemas.validate
+echo "[pre-commit] contract"   && python -m src.platform.harness.contract_compat
+echo "[pre-commit] breakers"   && python -m src.platform.harness.breaker_rules.validate
+echo "[pre-commit] paramclass" && python -m src.platform.harness.param_class_check
+echo "[pre-commit] runbook"    && python -m src.platform.harness.runbook_check
+if command -v detect-secrets >/dev/null 2>&1; then
+  # 与 CI 同一脚本源（§5 E1）：判定口径归 harness.secret_scan，命中即非零退出阻断提交。
+  echo "[pre-commit] secrets" && detect-secrets scan --all-files | python -m src.platform.harness.secret_scan
+else
+  echo "[pre-commit] secrets: detect-secrets 未安装，跳过（CI 仍强校验）"
+fi
+echo "[pre-commit] 全绿"

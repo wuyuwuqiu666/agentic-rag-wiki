@@ -1,0 +1,8 @@
+breaker: B3
+metric: local_throughput_drop
+comparator: ">="
+level: hard
+soft: 0.2
+hard: 0.3
+reason: 本地 embedding 稳态吞吐跌幅（NFR-8 fail-loud；越 30% 并入 B3 换插云加速档）
+adr: ADR-005

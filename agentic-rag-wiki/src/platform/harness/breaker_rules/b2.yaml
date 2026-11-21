@@ -1,0 +1,8 @@
+breaker: B2
+metric: inflight_llm
+comparator: ">="
+level: soft
+soft: 6
+hard: 8
+reason: 在飞 LLM 请求超执行档上限（分池预算 + 判例预算；云调用记账）
+adr: ADR-005

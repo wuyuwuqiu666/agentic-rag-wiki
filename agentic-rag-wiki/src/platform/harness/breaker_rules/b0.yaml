@@ -1,0 +1,8 @@
+breaker: B0
+metric: unresolved_trips
+comparator: ">="
+level: hard
+soft: 2
+hard: 3
+reason: 总闸升级（连续未复位触发）
+adr: ADR-003

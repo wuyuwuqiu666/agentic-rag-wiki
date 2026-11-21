@@ -1,0 +1,8 @@
+breaker: B5
+metric: reconcile_divergence_lag_s
+comparator: ">="
+level: hard
+soft: 60
+hard: 300
+reason: 双存储背离债（PG↔Milvus 对账差集/补偿队列水位滞后秒数）
+adr: ADR-002

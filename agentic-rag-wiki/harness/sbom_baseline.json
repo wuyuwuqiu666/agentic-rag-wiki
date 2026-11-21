@@ -1,0 +1,22 @@
+{
+  "components": [
+    {
+      "name": "pydantic",
+      "version": "2.12.5",
+      "license": "MIT",
+      "status": "allowed"
+    },
+    {
+      "name": "pydantic-settings",
+      "version": "2.14.2",
+      "license": "MIT",
+      "status": "allowed"
+    },
+    {
+      "name": "PyYAML",
+      "version": "6.0.3",
+      "license": "MIT",
+      "status": "allowed"
+    }
+  ]
+}

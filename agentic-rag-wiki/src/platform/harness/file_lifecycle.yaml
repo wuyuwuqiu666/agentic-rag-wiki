@@ -1,0 +1,12 @@
+# 文件生命周期与自动清理/归档策略（慢门=提案→影子→批准→应用→可回滚，护栏产物 #4a）
+# 运行时写入前 + 提交前机检：workspace/ 各区产物按此保留；append-only 审计永不自动删。
+retention:
+  workspace/agent-scratch: {max_age_days: 3, action: delete}
+  workspace/webcache: {max_age_days: 30, action: delete}
+  workspace/canonical-draft: {max_age_days: 14, action: archive}
+  workspace/eval: {max_age_days: 180, action: archive}
+  workspace/reconcile: {max_age_days: 90, action: archive}
+  workspace/drills: {max_age_days: 180, action: archive}
+protected_append_only:
+  - workspace/audit        # 熔断/越权事件，禁自动删改（T/NFR-5）
+  - tests/eval             # 金标尺子，只读（FR-MEM-5）

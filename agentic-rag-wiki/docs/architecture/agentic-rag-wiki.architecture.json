@@ -1,0 +1,357 @@
+{
+  "schema_version": 1,
+  "diagram_type": "architecture",
+  "meta": {
+    "title": "Agentic RAG + LLM wiki 知识库 · 整体架构",
+    "output": "agentic-rag-wiki.architecture.html",
+    "locale": "zh-CN",
+    "quality_profile": "showcase",
+    "viewBox": [
+      1310,
+      540
+    ],
+    "views": [
+      {
+        "id": "ask-path",
+        "label": "问答读路径",
+        "focus": [
+          "users",
+          "http",
+          "gate",
+          "ingest",
+          "ports",
+          "stores"
+        ],
+        "note": "可见域收紧 → 漏斗四层 → 两路召回 → 出口 DLP 出答案。"
+      },
+      {
+        "id": "ingest-path",
+        "label": "摄取写路径",
+        "focus": [
+          "gate",
+          "ingest",
+          "ports",
+          "stores"
+        ],
+        "note": "判门在写侧之前，一次动作只传感一次；两路索引同生同灭。"
+      },
+      {
+        "id": "writeback",
+        "label": "跨区三禁",
+        "focus": [
+          "wiki",
+          "ingest",
+          "memory",
+          "gate"
+        ],
+        "note": "B 区回写只经 IngestionPort；C 区不得自动写安全参数。"
+      },
+      {
+        "id": "assembly",
+        "label": "装配与档位",
+        "focus": [
+          "comp",
+          "gate",
+          "ports",
+          "models"
+        ],
+        "note": "组合根是全仓唯一注入点，跨区触达一律经端口。"
+      }
+    ]
+  },
+  "components": [
+    {
+      "id": "users",
+      "type": "external",
+      "label": "读者 · 值班",
+      "sublabel": "浏览器 / CLI",
+      "pos": [
+        20,
+        220
+      ],
+      "size": [
+        150,
+        84
+      ]
+    },
+    {
+      "id": "http",
+      "type": "backend",
+      "label": "HTTP/SSE 门面",
+      "sublabel": "FastAPI 18 端点",
+      "pos": [
+        300,
+        40
+      ],
+      "size": [
+        150,
+        76
+      ]
+    },
+    {
+      "id": "cli",
+      "type": "backend",
+      "label": "CLI 命令面",
+      "sublabel": "8 子命令",
+      "tag": "复位入口",
+      "pos": [
+        300,
+        400
+      ],
+      "size": [
+        150,
+        76
+      ]
+    },
+    {
+      "id": "gate",
+      "type": "security",
+      "label": "PolicyGate",
+      "sublabel": "B0–B5 判门",
+      "tag": "写侧闸门",
+      "pos": [
+        580,
+        220
+      ],
+      "size": [
+        150,
+        90
+      ]
+    },
+    {
+      "id": "comp",
+      "type": "backend",
+      "label": "组合根",
+      "sublabel": "唯一注入点",
+      "pos": [
+        580,
+        400
+      ],
+      "size": [
+        150,
+        80
+      ]
+    },
+    {
+      "id": "wiki",
+      "type": "backend",
+      "label": "B 区编译",
+      "sublabel": "WikiLoop 人审",
+      "pos": [
+        860,
+        40
+      ],
+      "size": [
+        150,
+        76
+      ]
+    },
+    {
+      "id": "ingest",
+      "type": "backend",
+      "label": "A 区摄取问答",
+      "sublabel": "唯一索引写入者",
+      "pos": [
+        860,
+        220
+      ],
+      "size": [
+        150,
+        90
+      ]
+    },
+    {
+      "id": "memory",
+      "type": "backend",
+      "label": "C 区记忆画像",
+      "sublabel": "审计写入者",
+      "pos": [
+        860,
+        400
+      ],
+      "size": [
+        150,
+        80
+      ]
+    },
+    {
+      "id": "ports",
+      "type": "backend",
+      "label": "Providers",
+      "sublabel": "14 端口三档",
+      "pos": [
+        1140,
+        220
+      ],
+      "size": [
+        150,
+        90
+      ]
+    },
+    {
+      "id": "stores",
+      "type": "database",
+      "label": "索引与账本",
+      "sublabel": "向量 BM25 缓存",
+      "pos": [
+        1140,
+        40
+      ],
+      "size": [
+        150,
+        76
+      ]
+    },
+    {
+      "id": "models",
+      "type": "external",
+      "label": "模型与解析",
+      "sublabel": "云 LLM OCR",
+      "pos": [
+        1140,
+        400
+      ],
+      "size": [
+        150,
+        76
+      ]
+    }
+  ],
+  "connections": [
+    {
+      "id": "users-http",
+      "from": "users",
+      "to": "http",
+      "label": "提问 · 审核",
+      "variant": "emphasis"
+    },
+    {
+      "id": "users-cli",
+      "from": "users",
+      "to": "cli",
+      "label": "双人复位"
+    },
+    {
+      "id": "http-gate",
+      "from": "http",
+      "to": "gate",
+      "label": "1:1 委派"
+    },
+    {
+      "id": "cli-gate",
+      "from": "cli",
+      "to": "gate",
+      "label": "不另算读数"
+    },
+    {
+      "id": "gate-ingest",
+      "from": "gate",
+      "to": "ingest",
+      "label": "问答 · 入库",
+      "variant": "emphasis"
+    },
+    {
+      "id": "gate-wiki",
+      "from": "gate",
+      "to": "wiki",
+      "label": "跑一轮编译",
+      "fromSide": "top"
+    },
+    {
+      "id": "wiki-ingest",
+      "from": "wiki",
+      "to": "ingest",
+      "label": "经 IngestionPort",
+      "variant": "security",
+      "labelAt": [
+        935,
+        168
+      ]
+    },
+    {
+      "id": "ingest-ports",
+      "from": "ingest",
+      "to": "ports",
+      "label": "经端口取能力",
+      "variant": "emphasis"
+    },
+    {
+      "id": "ports-stores",
+      "from": "ports",
+      "to": "stores",
+      "label": "双写 · 记账"
+    },
+    {
+      "id": "ports-models",
+      "from": "ports",
+      "to": "models",
+      "label": "云主档 → 兜底",
+      "labelAt": [
+        1215,
+        355
+      ]
+    },
+    {
+      "id": "ingest-memory",
+      "from": "ingest",
+      "to": "memory",
+      "label": "可见域 · 审计",
+      "labelAt": [
+        935,
+        355
+      ]
+    },
+    {
+      "id": "comp-gate",
+      "from": "comp",
+      "to": "gate",
+      "label": "装配产出",
+      "variant": "dashed"
+    },
+    {
+      "id": "comp-memory",
+      "from": "comp",
+      "to": "memory",
+      "label": "接成三分区",
+      "variant": "dashed"
+    }
+  ],
+  "cards": [
+    {
+      "dot": "cyan",
+      "title": "三条不变式",
+      "items": [
+        "判门在写侧之前，一次动作只传感一次",
+        "只读不传感：观测入口不成故障源",
+        "读写分门：GET 补不了任何块"
+      ]
+    },
+    {
+      "dot": "emerald",
+      "title": "跨区三禁（check_imports 机检）",
+      "items": [
+        "禁跨区 import，含私有 _types",
+        "B 区回写只经 IngestionPort",
+        "C 区不得自动写安全参数"
+      ]
+    },
+    {
+      "dot": "amber",
+      "title": "执行档单进程",
+      "items": [
+        "三分区与 providers 同进程装配",
+        "进程拆分＝ADR-005 放行项",
+        "变更事件 fan-out 见流程图"
+      ]
+    },
+    {
+      "dot": "rose",
+      "title": "图上没画＝未落地",
+      "items": [
+        "源连接器＝放行项㉒，仅 SourcePort 契约",
+        "企业档 PG/Milvus＝放行项②",
+        "默认 dev：内存向量 / 文件库 / 进程内队列"
+      ]
+    }
+  ]
+}

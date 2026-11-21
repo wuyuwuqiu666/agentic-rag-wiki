@@ -1,0 +1,8 @@
+breaker: B1
+metric: batch_delete_ratio
+comparator: ">="
+level: hard
+soft: 0.01
+hard: 0.10
+reason: 批量删除占比超阈（1% 软 / 10% 硬隔离区放行前拦截）
+adr: ADR-002

@@ -1,0 +1,57 @@
+@import "tailwindcss";
+
+/* 检索室设计令牌：钢蓝 ink / 暖纸 paper / 黄铜 seal(=人审 wiki 权威) / 石板 slate(=原文 source)。
+   刻意避开 AI 默认：cream#F4F1EA+terracotta、黑底荧光绿、等宽圆角 SaaS 卡套。 */
+@theme {
+  --color-ink: #1b2a3a;
+  --color-ink-soft: #5a6b7b;
+  --color-paper: #faf8f2;
+  --color-paper-raised: #fffefb;
+  --color-rule: #d8d2c4;
+  --color-seal: #b07d2b;
+  --color-seal-soft: #f0e6d2;
+  --color-slate: #496b84;
+  --color-slate-soft: #e4ebf0;
+  --color-brick: #a8492f;
+
+  --font-serif: "Source Serif 4", "Songti SC", Georgia, serif;
+  --font-sans: "IBM Plex Sans", system-ui, sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, monospace;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  background: var(--color-ink);
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+}
+
+::selection {
+  background: var(--color-seal-soft);
+}
+
+/* 引用标记 ↔ 右侧卡片联动时的高亮脉冲（一次编排的揭示，非散落动画）。 */
+@keyframes seal-pulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(176, 125, 43, 0.5);
+  }
+  100% {
+    box-shadow: 0 0 0 10px rgba(176, 125, 43, 0);
+  }
+}
+.link-pulse {
+  animation: seal-pulse 0.9s ease-out;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .link-pulse {
+    animation: none;
+  }
+}

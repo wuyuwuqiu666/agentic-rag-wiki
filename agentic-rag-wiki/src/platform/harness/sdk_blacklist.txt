@@ -1,0 +1,22 @@
+# SDK / provider 实现黑名单（护栏产物 #2）：service/runtime/repo/types/config/breaker 出现即违规。
+# 唯一豁免：providers/* 实现（含 orchestration_langgraph.py）与 gateway 组合根。
+# 例外（更严）：langgraph/langchain 不吃目录级豁免——只允许出现在 orchestration_langgraph.py 单文件（§6 禁令3，check_imports 机检，M4-bk）。
+# —— 供给/向量/模型 SDK ——
+openai
+ollama
+boto3
+langgraph
+langchain
+pymilvus
+milvus
+FlagEmbedding
+sentence_transformers
+transformers
+torch
+llama_cpp
+elasticsearch
+qdrant_client
+chromadb
+pypdf
+# —— §6 禁令1 横切能力 SDK（须经 providers 端口，禁 service/runtime 直连；logging 走 stdlib）——
+structlog
