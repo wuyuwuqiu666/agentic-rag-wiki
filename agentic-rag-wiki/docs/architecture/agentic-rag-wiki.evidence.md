@@ -21,7 +21,7 @@
 | --- | --- | --- |
 | Web 前端 | `src/platform/gateway/web/`（Vite+React+TS+Tailwind v4+Motion），`http.py` 在 `web/dist` 存在时同源挂载 | high |
 | Gateway 应用 · 组合根 | `platform/gateway/composition.py`（docstring 自称"唯一注入点"） | high |
-| · HTTP/SSE 门面 | `platform/gateway/http.py` | high |
+| · HTTP 门面 | `platform/gateway/http.py` | high |
 | · CLI 命令面 | `platform/gateway/cli.py` | high |
 | · App / Admin façade | `platform/gateway/app.py` / `admin.py` | high |
 | · PolicyGate / InflightTracker | `platform/gateway/policy_gate.py` / `inflight.py` | high |
@@ -40,7 +40,7 @@
 | · IngestionPort | A 区暴露的 Protocol（B 区唯一回写通道） | high |
 | B 区 wiki 编译 | `src/partitions/wiki/runtime/loop.py` + `service/{compile,review,triage}.py` + `repo/pages.py` | high |
 | C 区 记忆与画像 | `src/partitions/memory/runtime/loop.py` + `service/{audit_sink,domain_scope,portrait_policy,param_proposal,report}.py` + `repo/portrait_store.py` | high |
-| 平台平面 | `platform/types/*.py`(6) · `config/settings.py` · `providers/`(28 文件) · `breaker/{engine,rules,pool,slo}.py` · `harness/`(10 门) | high |
+| 平台平面 | `platform/types/*.py`(6) · `config/settings.py` · `providers/`(28 文件、`ports.py` 15 个 Protocol) · `breaker/{engine,rules,pool,slo}.py` · `harness/`(10 门) | high |
 | 向量/词法/缓存/对象库/队列/审计/画像/产物 | `providers/vectorstore_{memory,pgvector,milvus}.py`、`bm25_dev.py`、`cache_memory.py`、`objectstore_{fs,s3}.py`、`mq_{pgqueue,kafka}.py`、`memory/service/audit_sink.py`、`artifact_dir` 下 reconcile/portraits | high |
 | 云 LLM / 云 Embedding·Rerank / 本地模型 / RapidOCR / 本机 Office | `providers/{llm_cloud,llm_local,llm_router,embedding_cloud,embedding_local,scan_ocr_rapid,fileparser_dev}.py` | high |
 | 真实源系统（SharePoint/OA/网盘/Git） | 无实现文件，仅 `SourcePort` 契约＋`DevSource` 内存档 | **unknown＝放行项㉒** |

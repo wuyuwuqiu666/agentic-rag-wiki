@@ -6,6 +6,11 @@ on:
 jobs:
   guardrails:
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    defaults:
+      run:
+        working-directory: agentic-rag-wiki
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
@@ -39,9 +44,10 @@ jobs:
         run: |
           python -m pytest tests/eval -q
       - name: secrets
+        working-directory: .
         run: |
           pip install detect-secrets
-          detect-secrets scan --all-files | python -m src.platform.harness.secret_scan
+          detect-secrets scan | PYTHONPATH=agentic-rag-wiki python -m src.platform.harness.secret_scan
       - name: deps license gate + SBOM diff (E8；CVE/权威 SPDX=放行档)
         run: |
           python -m src.platform.harness.deps_governance --baseline harness/sbom_baseline.json

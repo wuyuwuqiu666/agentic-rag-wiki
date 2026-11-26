@@ -3,11 +3,11 @@
   "ok": true,
   "command": "visual-check",
   "status": "pass",
-  "visualReview": "pending",
+  "visualReview": "passed",
   "artifact": {
-    "path": "D:\\zcode workspace\\Agentic RAG + LLM wiki\\agentic-rag-wiki\\docs\\architecture\\agentic-rag-wiki.architecture.html",
-    "sha256": "94a92ef8e092645e7bc137106f80ba3cfca79dc07978add0a57930342520f960",
-    "bytes": 733116
+    "path": "agentic-rag-wiki/docs/architecture/agentic-rag-wiki.architecture.html",
+    "sha256": "15552979f8c2ef0333c7a70719c6561cdc8bedd10a8bf4ec5c0c740c2bc3b238",
+    "bytes": 733417
   },
   "state": {
     "detail": "read",
@@ -15,7 +15,7 @@
   },
   "chrome": {
     "status": "available",
-    "executable": "C:\\Program Files (x86)\\Microsoft\\Edge\\Application\\msedge.exe"
+    "executable": "Microsoft Edge"
   },
   "diagnostics": [],
   "containment": {

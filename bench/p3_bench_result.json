@@ -3,7 +3,7 @@
   "cuda": "12.8",
   "gpu": "NVIDIA GeForce RTX 5060 Laptop GPU",
   "vram_GB": 7.96,
-  "model": "C:\\Users\\z1499\\.cache\\modelscope\\models\\Qwen--Qwen3-Embedding-0.6B\\snapshots\\master",
+  "model": "Qwen3-Embedding-0.6B",
   "dtype": "fp16",
   "tokens_per_chunk": 531,
   "batches": {

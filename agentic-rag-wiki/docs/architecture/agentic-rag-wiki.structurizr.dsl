@@ -14,11 +14,11 @@ workspace "Agentic RAG + LLM wiki 知识库" "现档 C4 模型（M4-cn 之后，
       web = container "Web 前端" "chat 主区 + 右侧 wiki 联动 + 入库/下架/改域/审核台；10 个视图组件" "Vite + React + TS + Tailwind v4 + Motion" {
         tags "BrowserApp"
       }
-      gateway = container "Gateway 应用（对外门面 + 组合根）" "执行档单进程；HTTP 18 端点 + CLI 8 子命令 + 装配表；进程拆分属 ADR-005 与实机放行项" "Python 3.12 + FastAPI" {
+      gateway = container "Gateway 应用（对外门面 + 组合根）" "执行档单进程；HTTP 21 路由 + CLI 13 注册位 + 装配表；进程拆分属 ADR-005 与实机放行项" "Python 3.12 + FastAPI" {
         tags "LogicalInProcess"
 
         gwComposition = component "组合根 composition.py" "全仓唯一同时可见 provider 具体实现与三分区的模块：按装配表把端口接成实现，产出 Container（22 字段）" "Python"
-        gwHttp = component "HTTP/SSE 门面 http.py" "18 个端点 1:1 委派 App/Admin，本层零业务逻辑、不改契约" "FastAPI"
+        gwHttp = component "HTTP 门面 http.py" "21 条路由 1:1 委派 App/Admin，本层零业务逻辑、不改契约" "FastAPI"
         gwCli = component "CLI 命令面 cli.py" "ask / ingest / admin{audit-replay,pool,funnel,degrade-plan,reset,reconcile,compensate}" "argparse"
         gwApp = component "App 问答与入库 façade" "问答链入口 + 写侧动作前置判门" "Python"
         gwAdmin = component "Admin 运维读回 façade" "审计回放 / 分池三本账 / 漏斗四层 / 降档判级 / 双人复位" "Python"
@@ -64,7 +64,7 @@ workspace "Agentic RAG + LLM wiki 知识库" "现档 C4 模型（M4-cn 之后，
 
         pfTypes = component "platform/types 契约模型" "E3 冻结契约：15 个模型入基线快照（含 ChunkDecision/NodeDecision/CanonicalNode）" "pydantic"
         pfConfig = component "Settings config/settings.py" "配置单一口径；幻影键由 config_surface_check 双向机检" "pydantic-settings"
-        pfPorts = component "providers/ports 14 个 Protocol" "Embedding/VectorStore/Lexical/ObjectStore/Mq/Rerank/Llm/Ocr/Guard/Graph/Cache/FileParser/…（G5 可换）" "Protocol"
+        pfPorts = component "providers/ports 15 个 Protocol" "Embedding/VectorStore/Lexical/ObjectStore/Mq/Rerank/Llm/Ocr/Guard/Graph/Cache/FileParser/…（G5 可换）" "Protocol"
         pfProviders = component "providers 28 个实现" "dev/local/cloud 三档 + milvus/pgvector/s3/kafka/langgraph；选档缺驱动即 fail-loud，绝不静默回落" "Python"
         pfBreaker = component "breaker engine + rules + pool + slo" "B0–B5 判定内核（零 IO 纯函数，8 个规则 YAML）＋分池三本账＋错误预算判级" "Python"
         pfHarness = component "harness 10 道护栏门" "check_imports/schemas/contract_compat/breaker_rules/param_class/lifecycle/config_surface/backend_choice/runbook/deps + secret_scan" "Python（构建期/提交期）" {
@@ -125,11 +125,11 @@ workspace "Agentic RAG + LLM wiki 知识库" "现档 C4 模型（M4-cn 之后，
     employee -> kb "提问、看答案与出处、看权威页"
     curator -> kb "入库、下架与恢复、改可见域、人审署名发布"
     ops -> kb "读回运维账、双人复位硬断"
-    employee -> web "浏览器问答" "HTTPS/SSE"
+    employee -> web "浏览器问答" "HTTPS"
     curator -> web "知识中心视图" "HTTPS"
 
     // ── 关系：门面内部 ─────────────────────────────────────────────────
-    web -> kb.gateway "调 18 个端点（REST + SSE 首 token）" "JSON / SSE"
+    web -> kb.gateway "调 21 条路由（REST）" "JSON"
     kb.gateway.gwHttp -> kb.gateway.gwApp "1:1 委派（本层零业务逻辑）"
     kb.gateway.gwHttp -> kb.gateway.gwAdmin "1:1 委派（只读账本）"
     kb.gateway.gwCli -> kb.gateway.gwApp "同一本账同一口径"

@@ -3,13 +3,14 @@
 教训记录：v1 误用 tokenize(...)[0] 取到 BatchEncoding 首键，块长校准恒判为 6 token，
         实际跑了 ~1200 token 块，数据作废。v2 用 tok(text)['input_ids'] 计数。
 """
+import os
 import subprocess
 import time
 import torch
 from transformers import AutoTokenizer
 from sentence_transformers import SentenceTransformer
 
-MODEL = r"C:\Users\z1499\.cache\modelscope\models\Qwen--Qwen3-Embedding-0.6B\snapshots\master"
+MODEL = os.environ.get("P3_MODEL", "Qwen3-Embedding-0.6B")
 TARGET = 800
 PHYS_GB = torch.cuda.get_device_properties(0).total_memory / 2**30
 SUSTAIN = 150

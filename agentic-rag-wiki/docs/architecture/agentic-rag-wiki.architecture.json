@@ -77,8 +77,8 @@
     {
       "id": "http",
       "type": "backend",
-      "label": "HTTP/SSE 门面",
-      "sublabel": "FastAPI 18 端点",
+      "label": "HTTP 门面",
+      "sublabel": "FastAPI 21 路由",
       "pos": [
         300,
         40
@@ -92,7 +92,7 @@
       "id": "cli",
       "type": "backend",
       "label": "CLI 命令面",
-      "sublabel": "8 子命令",
+      "sublabel": "CLI 13 注册位",
       "tag": "复位入口",
       "pos": [
         300,
@@ -178,7 +178,7 @@
       "id": "ports",
       "type": "backend",
       "label": "Providers",
-      "sublabel": "14 端口三档",
+      "sublabel": "15 端口三档",
       "pos": [
         1140,
         220

@@ -1,10 +1,11 @@
 # -*- coding: utf-8 -*-
 """P3 复测：加密批档找真实拐点 + 可复现性 + 超订行为确认"""
+import os
 import time
 import torch
 from sentence_transformers import SentenceTransformer
 
-MODEL = r"C:\Users\z1499\.cache\modelscope\models\Qwen--Qwen3-Embedding-0.6B\snapshots\master"
+MODEL = os.environ.get("P3_MODEL", "Qwen3-Embedding-0.6B")
 base = ("企业知识库制度文档示例段落，规定信息化项目的立项流程、预算审批权限与验收标准。"
         "项目组应当在启动前完成需求调研，并提交可行性研究报告供委员会评审。")
 chunk = (base * 20)[:950]
