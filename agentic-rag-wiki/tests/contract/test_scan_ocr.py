@@ -181,28 +181,24 @@ def test_ocr_sdks_are_confined_to_one_provider_file() -> None:
 
 @pytest.mark.skipif(not RapidScanOcr.available(), reason="需本机 OCR 供给（rapidocr-onnxruntime + pypdfium2）")
 def test_real_engine_reads_a_scanned_page_no_ocr_supply_cannot_fabricate() -> None:
-    """真引擎往返（本机装有 OCR 档时才跑）：现场造纯图像 PDF → 逐页认出中文。
+    """真引擎往返（本机装有 OCR 档时才跑）：现场造纯图像 PDF → 逐页识别文本。
 
     这条是 pypdfium2 渲染参数（`scale`/`to_pil`）与 RapidOCR 调用形状（`engine(ndarray)` → 行列表）的
-    唯一执法：桩件测不到，写错会让所有扫描件静默变 4xx 而套件里无一例能发现。
+    唯一执法：桩件测不到，写错会让所有扫描件静默变 4xx 而套件里无一例能发现。夹具用 Pillow 自带字体，
+    不依赖 Windows 中文字体，确保 Linux CI 与本地执行同一路径。
     """
     from PIL import Image, ImageDraw, ImageFont
 
     def page(lines: list[str]) -> Image.Image:
-        img = Image.new("RGB", (900, 260), "white")
+        img = Image.new("RGB", (1100, 260), "white")
         draw = ImageDraw.Draw(img)
-        font = None
-        for candidate in ("C:/Windows/Fonts/msyh.ttc", "C:/Windows/Fonts/simhei.ttf"):
-            try:
-                font = ImageFont.truetype(candidate, 40)
-                break
-            except OSError:
-                continue
+        font = ImageFont.load_default(size=44)
         for i, text in enumerate(lines):
             draw.text((28, 30 + i * 80), text, font=font, fill="black")
         return img
 
-    first, second = page(["差旅报销制度 2026 版", "机票需提前三天预订"]), page(["市内交通费每日上限八十元"])
+    first = page(["Travel reimbursement policy 2026", "Book flights three days ahead"])
+    second = page(["Daily local transport limit eighty yuan"])
     buf = io.BytesIO()
     first.save(buf, format="PDF", resolution=150.0, append_images=[second], save_all=True)
     data = buf.getvalue()
@@ -212,5 +208,5 @@ def test_real_engine_reads_a_scanned_page_no_ocr_supply_cannot_fabricate() -> No
     parsed = DevFileParser().parse("scanned.pdf", data)
     assert parsed.page_state == "scanned"
     assert parsed.ocr_pages == (0, 1) and parsed.failed_pages == ()
-    assert "差旅报销制度" in parsed.text and "提前三天" in parsed.text
-    assert "每日上限八十元" in parsed.text
+    assert "Travel reimbursement policy" in parsed.text and "three days ahead" in parsed.text
+    assert "Daily local transport limit eighty yuan" in parsed.text
