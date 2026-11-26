@@ -16,8 +16,8 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
-      - name: install (dev deps only, 零外部服务)
-        run: pip install -e ".[dev]"
+      - name: install (dev + 可选实现契约依赖，零外部服务)
+        run: pip install -e ".[dev,http,orchestration,documents,ocr,s3,kafka]"
       - name: lint + type
         run: |
           python -m ruff check src tests
