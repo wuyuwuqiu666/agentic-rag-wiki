@@ -40,7 +40,7 @@ def test_cloud_choice_with_credentials_loads() -> None:
         env="prod",
         providers={"llm": "cloud"},
         cloud_llm_base_url="https://gateway.internal/v1",
-        cloud_llm_api_key="from-env-not-committed",
+        cloud_llm_api_key="from-env-not-committed",  # pragma: allowlist secret -- 合成占位值
     )
     assert s.providers.llm == "cloud"
     assert s.env == "prod"

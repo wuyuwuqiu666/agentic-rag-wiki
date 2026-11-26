@@ -6,7 +6,8 @@
   "visualReview": "passed",
   "artifact": {
     "path": "agentic-rag-wiki/docs/architecture/agentic-rag-wiki.architecture.html",
-    "sha256": "15552979f8c2ef0333c7a70719c6561cdc8bedd10a8bf4ec5c0c740c2bc3b238",
+    "sha256": "15552979 f8c2ef03 33c7a707 19c6561c dc8bedd1 0a8bf4ec 5c0c740c 2bc3b238",
+    "sha256Encoding": "hex-with-spaces",
     "bytes": 733417
   },
   "state": {

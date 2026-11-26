@@ -32,8 +32,8 @@ def _stubbed_s3() -> tuple[S3ObjectStore, Any]:
 
     client = boto3.client(
         "s3",
-        aws_access_key_id="ak-test",  # 仅 Stubber 本地签名占位，绝不触网
-        aws_secret_access_key="sk-test",
+        aws_access_key_id="ak-test",  # pragma: allowlist secret -- 仅 Stubber 假凭证，绝不触网
+        aws_secret_access_key="sk-test",  # pragma: allowlist secret -- 仅 Stubber 假凭证，绝不触网
         region_name="us-east-1",
         endpoint_url="http://stubbed.invalid",
     )
